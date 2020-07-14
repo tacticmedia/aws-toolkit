@@ -1,0 +1,32 @@
+<?php
+$header = <<<'EOF'
+This file is part of Tactic Media AWS Toolkit.
+
+(c) 2020 Tactic Media Pty Ltd <support@tacticmedia.com.au>
+
+See LICENSE for more details.
+EOF;
+
+$finder = PhpCsFixer\Finder::create()
+    ->in('src')
+    ->exclude('src/.bootstrap.php')
+    ->exclude('src/CacheKernel.php')
+    ->exclude('src/Kernel.php')
+;
+
+$config = PhpCsFixer\Config::create()
+    ->setRiskyAllowed(false)
+    ->setRules([
+        '@Symfony' => true,
+        '@PhpCsFixer' => true,
+        'php_unit_test_class_requires_covers' => false,
+        'php_unit_internal_class' => false,
+        '@DoctrineAnnotation' => true,
+        'list_syntax' => ['syntax' => 'long'],
+        'array_syntax' => ['syntax' => 'short'],
+        'header_comment' => ['header' => $header],
+    ])
+    ->setFinder($finder)
+;
+
+return $config;
