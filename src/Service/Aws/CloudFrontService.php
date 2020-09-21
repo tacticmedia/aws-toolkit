@@ -47,7 +47,7 @@ class CloudFrontService extends AwsService
         $originAccessIdentityId = $result['CloudFrontOriginAccessIdentity']['Id'];
 
         $callerReference = $originName.'-caller';
-        $comment = 'Created by Tactic Media AWS Toolkit';
+        $comment = ($hostname ? $hostname.' - ' : '').'Created by Tactic Media AWS Toolkit';
         $defaultCacheBehavior = [
             'AllowedMethods' => [
                 'CachedMethods' => [
@@ -73,7 +73,7 @@ class CloudFrontService extends AwsService
                 ],
             ],
             'LambdaFunctionAssociations' => ['Quantity' => 0],
-            'MaxTTL' => 0,
+            'MaxTTL' => 31536000, // 1 year
             'MinTTL' => 0,
             'SmoothStreaming' => false,
             'TargetOriginId' => $originName,
